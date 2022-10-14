@@ -1,0 +1,103 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API With REDIS",
+      "description": "This is an API REST",
+      "version": "0.0.1b",
+      "contact": {
+        "email": "email@me.com"
+      }
+    },
+    "components": {
+      "schemas": {
+        "Users": {
+          "type": "object",
+          "required": ["name", "email"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The auto generate uuid of the User"
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the User"
+            },
+            "email": {
+              "type": "string",
+              "description": "The email of the User"
+            }
+          }
+        }
+      }
+    },
+    "paths": {
+      "/users": {
+        "get": {
+          "tags": ["Users"],
+          "sumary": "List all users",
+          "description": "List all users",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "user": {
+                          "id": "f0f59dfd-2486-48ed-8d59-152deb80517d",
+                          "name": "Rachael Cassin",
+                          "email": "Katrine_Hills21@yahoo.com"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/clear-cache": {
+        "get": {
+          "tags": ["Clear Cache"],
+          "sumary": "List all users",
+          "description": "List all users",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "example": {
+                        "ok": "user cache is clean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

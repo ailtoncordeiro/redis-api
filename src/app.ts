@@ -1,8 +1,13 @@
 import express from 'express';
 import UserController from './controllers/UserController';
 import redis from './lib/cache';
+import swaggerUi from 'swagger-ui-express';
+
+import swaggerFile from "../src/swagger.json";
 
 const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.get('/', (req, res) => res.send("Its working"));
 
@@ -15,7 +20,7 @@ app.get('/clear-cache', async (req, res) => {
     console.log('cache clean')
 
     res.json({
-        ok: true,
+        ok: "user cache is clean",
     });
 
 });
