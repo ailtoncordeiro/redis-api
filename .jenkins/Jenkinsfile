@@ -1,0 +1,42 @@
+node('docker_node') {
+    
+    stage('Git'){
+        gitPhase()
+    }
+    stage('Build'){
+        buildPhase()
+    }
+    stage('Run'){
+        runPhase()
+    }
+    
+}
+
+def gitPhase() {
+
+    checkout scm
+
+}
+
+def buildPhase() {
+
+    configFileProvider(
+        [configFile(fileId: 'eb2aff60-9719-4ae4-aba9-b1930799b841', targetLocation: '.env')]) {
+    }
+
+    sh "docker build -t apiredis:${BRANCH_NAME}-${BUILD_NUMBER} . --no-cache"
+
+}
+
+def runPhase() {
+
+    configFileProvider(
+        [configFile(fileId: '9b1c41f3-108a-441e-9646-cfe1a86ac40a', targetLocation: 'docker-compose-ci.yaml')]) {
+    } 
+
+    sh "echo DOCKER_IMAGE=apiredis:${BRANCH_NAME}-${BUILD_NUMBER} >> .env"
+    sh "echo CONTAINER_NAME=redisapi-${BRANCH_NAME} >> .env"
+
+    sh "docker-compose -f docker-compose-ci.yaml -p redisapi_${BRANCH_NAME} up -d"
+
+}
