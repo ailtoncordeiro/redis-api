@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    depends_on:
+     - redis
+    command: npm run dev
+    ports:
+     - 3000:3000
+    volumes:
+     - .:/usr/app
+     - /usr/app/node_modules
+    enviroment:
+      NODE_ENV: dev
+      PORT: 3000
+  
+  redis:
+    image: bitname/redis:latest
+    expose:
+     - 6379
+    enviroment:
+      REDIS_PASSWORD: redispass
+      
