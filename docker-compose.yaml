@@ -2,23 +2,30 @@ version: '3.7'
 
 services:
   app:
+    container_name: api
     build: .
     depends_on:
      - redis
-    command: npm run dev
     ports:
      - 3000:3000
+    networks:
+      - redis-network
     volumes:
      - .:/usr/app
      - /usr/app/node_modules
-    enviroment:
+    environment:
       NODE_ENV: dev
       PORT: 3000
   
   redis:
-    image: bitname/redis:latest
+    container_name: redis
+    image: bitnami/redis:latest
     expose:
      - 6379
-    enviroment:
+    networks:
+      - redis-network
+    environment:
       REDIS_PASSWORD: redispass
-      
+
+networks:
+  redis-network:
