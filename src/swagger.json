@@ -12,7 +12,10 @@
     "schemas": {
       "Users": {
         "type": "object",
-        "required": ["name", "email"],
+        "required": [
+          "name",
+          "email"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -34,8 +37,9 @@
   "paths": {
     "/users": {
       "get": {
-        "tags": ["Users"],
-        "sumary": "List all users",
+        "tags": [
+          "Users"
+        ],
         "description": "List all users",
         "responses": {
           "200": {
@@ -43,7 +47,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
+                  "type": "object",
                   "items": {
                     "type": "object",
                     "properties": {
@@ -73,18 +77,21 @@
         }
       },
       "post": {
-        "tags": ["Users"],
-        "sumary": "Create user",
+        "tags": [
+          "Users"
+        ],
         "description": "Create user",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "description": "Created user object",
+        "requestBody": {
+          "description": "User",
           "required": true,
-          "schema": {
-            "$ref": "#/definitions/User"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
           }
-        }],
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -107,8 +114,9 @@
     },
     "/clear-cache": {
       "get": {
-        "tags": ["Clear Cache"],
-        "sumary": "Clear cache",
+        "tags": [
+          "Clear Cache"
+        ],
         "description": "Clear cache",
         "responses": {
           "200": {
@@ -134,17 +142,23 @@
   "definitions": {
     "User": {
       "type": "object",
+      "required": [
+        "name",
+        "email"
+      ],
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "Full name"
         },
         "email": {
-          "type": "string"
+          "type": "string",
+          "example": "email@email.com"
         }
-      },
-      "xml": {
-        "name": "User"
       }
+    },
+    "xml": {
+      "name": "User"
     }
   }
 }
