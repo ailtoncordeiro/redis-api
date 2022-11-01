@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
     const users = [];
 
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 15; i++) {
         users.push({
             name: faker.name.fullName(),
             email: faker.internet.email(),

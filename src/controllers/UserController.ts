@@ -34,6 +34,23 @@ class UserController {
         }
     }
 
+    static async create(request: Request, response: Response) {
+
+        const { name, email } = request.body;
+
+        const result = await prisma.user.create({
+            data: {
+                name,
+                email
+            },
+        });
+        
+        response.json({
+            "success": true
+        });
+
+    }
+
 }
 
 export default UserController

@@ -71,13 +71,29 @@
               }
             }
           }
+        },
+        "post": {
+          "tags":["Users"],
+          "sumary": "Create users",
+          "description": "Create user",
+          "parameters": [
+            {
+              "name": "string",
+              "email": "string"
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
         }
       },
       "/clear-cache": {
         "get": {
           "tags": ["Clear Cache"],
-          "sumary": "List all users",
-          "description": "List all users",
+          "sumary": "Clear cache",
+          "description": "Clear cache",
           "responses": {
             "200": {
               "description": "Success",
