@@ -78,13 +78,23 @@
           "description": "Create user",
           "parameters": [
             {
-              "name": "string",
-              "email": "string"
+              "name": "name",
+              "in": "body",
+              "description": "full name",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "email",
+              "in": "body",
+              "description": "email@email.com",
+              "required": true,
+              "type": "string"
             }
           ],
           "responses": {
-            "405": {
-              "description": "Invalid input"
+            "200": {
+              "success": true
             }
           }
         }
