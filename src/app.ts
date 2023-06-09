@@ -26,7 +26,7 @@ app.get('/clear-cache', async (req, res) => {
     console.log('cache clean')
 
     res.json({
-        ok: "user cache is clean",
+        ok: "user cache is clean!",
     });
 
 });
